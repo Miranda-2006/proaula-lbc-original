@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalle Temporada</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}" />
+</head>
+<body>
+
+<header id="inicio">
+  <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+  <h1>Liga de Béisbol de Cartagena</h1>
+  <p>Bienvenido al sistema de gestión de la liga</p>
+  <div>
+    <h2 th:text="${temporada.nombreTemporada}">Temporada</h2>
+  </div>
+</header>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="/temporadas">Temporadas</a>
+  <a href="/temporadas-jugadores">Jugadores</a>
+  <a href="#descripcion">¿Qué es?</a>
+</nav>
+
+<main class="contenido" style="max-width: 700px; margin: auto; padding: 1rem;">
+  <a th:href="@{/temporadas}" class="btn" style="margin-bottom: 1rem; display: inline-block;">Volver</a>
+
+  <div th:each="equipo : ${equipos}" 
+       style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #ccc;">
+    <h3 th:text="${equipo.nombre} + ' (' + ${equipo.ciudad} + ')'"></h3>
+
+    <h4 style="margin-top: 1rem; color: #C8102E;">Bateadores</h4>
+    <ul>
+      <li th:each="b : ${equipo.bateadores}" th:text="${b.nombre}"></li>
+    </ul>
+
+    <h4 style="margin-top: 1rem; color: #003580;">Lanzadores</h4>
+    <ul>
+      <li th:each="l : ${equipo.lanzadores}" th:text="${l.nombre}"></li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

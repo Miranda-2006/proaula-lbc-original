@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil de Jugador Bateador</title>
+    <link rel="stylesheet" th:href="@{/css/perfil-bateador.css}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<!-- MINI HERO -->
+<header class="mini-hero">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <h1 class="hero-title">Perfil de Bateador</h1>
+  </div>
+</header>
+
+<!-- VOLVER -->
+<nav class="simple-nav">
+  <div class="nav-container">
+    <a th:href="@{/admin/listar-jugadores-equipo/{idTemporada}/{indexEquipo}(idTemporada=${idTemporada}, indexEquipo=${indexEquipo})}" class="btn-back">Volver</a>
+  </div>
+</nav>
+
+<main class="profile-content">
+  <div class="profile-card">
+
+    <!-- FOTO + NOMBRE -->
+	<div class="player-header">
+	    <img th:src="@{/admin/jugador-bateador/foto/{nombre}(nombre=${bateador.nombre})}"
+	         class="player-photo">
+
+	    <h2 class="player-name" th:text="${bateador.nombre}">Nombre Jugador</h2>
+
+	    <!-- ⭐ Equipo donde juega -->
+	    <h3 class="team-name">
+	       <span th:text="${equipoNombre}"></span>
+	    </h3>
+
+		<br>
+		
+	    <!-- ⭐ Logo del equipo -->
+		    <img th:src="@{'/admin/imagen-equipo/' + ${equipo.nombre}}"
+		         style="width: 100px; height: 110px; object-fit: cover; border-radius: 8px;">
+		</td>
+
+	</div>
+	<hr class="divider">
+    <!-- DETALLES -->
+    <div class="player-details">
+      <h3 class="section-title">Detalles del Jugador</h3>
+      <ul>
+        <li><strong>Edad:</strong> <span th:text="${bateador.edad}">0</span> años</li>
+        <li><strong>Posición:</strong> <span th:text="${bateador.posicion}">Posición</span></li>
+        <li><strong>Mano de Bateo:</strong> <span th:text="${bateador.derecho_zurdo}">Derecho/Zurdo</span></li>
+      </ul>
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="player-stats">
+      <h3 class="section-title">Estadísticas Ofensivas</h3>
+      <ul>
+        <li><strong>Home Runs (HR):</strong> <span th:text="${bateador.homeRuns}">0</span></li>
+        <li><strong>Triples (3B):</strong> <span th:text="${bateador.triples}">0</span></li>
+        <li><strong>Dobles (2B):</strong> <span th:text="${bateador.dobles}">0</span></li>
+        <li><strong>Sencillos (1B):</strong> <span th:text="${bateador.sencillos}">0</span></li>
+        <li><strong>Ponches (K):</strong> <span th:text="${bateador.ponches}">0</span></li>
+      </ul>
+    </div>
+
+	<hr class="divider">
+	<!-- GRÁFICOS -->
+	<div class="charts-container">
+		<h3 class="section-title">Gráficos</h3>
+
+	    <!-- 1. Pie Chart -->
+	    <div id="pieChart" class="chart"
+	         th:data-hr="${bateador.homeRuns}"
+	         th:data-triples="${bateador.triples}"
+	         th:data-dobles="${bateador.dobles}"
+	         th:data-sencillos="${bateador.sencillos}"
+	         th:data-ponches="${bateador.ponches}">
+	    </div>
+
+	    <!-- 2. Bar Chart -->
+	    <div id="barChart" class="chart"
+	         th:data-hr="${bateador.homeRuns}"
+	         th:data-triples="${bateador.triples}"
+	         th:data-dobles="${bateador.dobles}"
+	         th:data-sencillos="${bateador.sencillos}"
+	         th:data-ponches="${bateador.ponches}">
+	    </div>
+
+	    <!-- 3. Bar Chart Horizontal -->
+	    <div id="barChartHorizontal" class="chart"
+	         th:data-hr="${bateador.homeRuns}"
+	         th:data-triples="${bateador.triples}"
+	         th:data-dobles="${bateador.dobles}"
+	         th:data-sencillos="${bateador.sencillos}"
+	         th:data-ponches="${bateador.ponches}">
+	    </div>
+
+	    <!-- 4. Stacked Column Chart -->
+	    <div id="stackedChart" class="chart"
+	         th:data-hr="${bateador.homeRuns}"
+	         th:data-triples="${bateador.triples}"
+	         th:data-dobles="${bateador.dobles}"
+	         th:data-sencillos="${bateador.sencillos}"
+	         th:data-ponches="${bateador.ponches}">
+	    </div>
+
+	</div>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+google.charts.load('current', {packages: ['corechart', 'bar', 'gauge']});
+google.charts.setOnLoadCallback(drawCharts);
+
+function drawCharts() {
+    drawPieChart();
+    drawBarChart();
+    drawHorizontalBarChart();
+    drawStackedChart();
+    drawGaugeChart();
+    drawBubbleChart();
+}
+
+function getStats() {
+    const div = document.getElementById('pieChart');
+    return {
+        hr: Number(div.dataset.hr || 0),
+        t: Number(div.dataset.triples || 0),
+        d: Number(div.dataset.dobles || 0),
+        s: Number(div.dataset.sencillos || 0),
+        k: Number(div.dataset.ponches || 0)
+    };
+}
+
+/* 1. GRÁFICA DE PASTEL/DONUT */
+function drawPieChart() {
+    const st = getStats();
+    const data = google.visualization.arrayToDataTable([
+        ['Estadística', 'Cantidad'],
+        ['Home Runs', st.hr],
+        ['Triples', st.t],
+        ['Dobles', st.d],
+        ['Sencillos', st.s],
+        ['Ponches', st.k]
+    ]);
+
+    const options = {
+        title: 'Distribución de Hits',
+        titleTextStyle: { fontSize: 20, bold: true },
+        pieHole: 0.4,
+        colors: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF'],
+        legend: { textStyle: { fontSize: 14 } }
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+    chart.draw(data, options);
+}
+
+/* 2. BARRAS VERTICALES */
+function drawBarChart() {
+    const st = getStats();
+    const data = google.visualization.arrayToDataTable([
+        ['Estadística', 'Cantidad', { role: 'style' }],
+        ['HR', st.hr, '#36A2EB'],
+        ['3B', st.t, '#FF6384'],
+        ['2B', st.d, '#FFCE56'],
+        ['1B', st.s, '#4BC0C0'],
+        ['K', st.k, '#9966FF']
+    ]);
+
+    const options = {
+        title: 'Estadísticas Totales',
+        titleTextStyle: { fontSize: 20, bold: true },
+        legend: { position: 'none' },
+        vAxis: { minValue: 0, textStyle: { fontSize: 14 } },
+        hAxis: { textStyle: { fontSize: 14 } }
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('barChart'));
+    chart.draw(data, options);
+}
+
+/* 3. BARRAS HORIZONTALES */
+function drawHorizontalBarChart() {
+    const st = getStats();
+    const data = google.visualization.arrayToDataTable([
+        ['Estadística', 'Cantidad'],
+        ['Home Runs', st.hr],
+        ['Triples', st.t],
+        ['Dobles', st.d],
+        ['Sencillos', st.s],
+        ['Ponches', st.k]
+    ]);
+
+    const options = {
+        title: 'Comparación Horizontal',
+        titleTextStyle: { fontSize: 20, bold: true },
+        legend: { textStyle: { fontSize: 14 } },
+        vAxis: { textStyle: { fontSize: 14 } },
+        hAxis: { textStyle: { fontSize: 14 } }
+    };
+
+    const chart = new google.visualization.BarChart(document.getElementById('barChartHorizontal'));
+    chart.draw(data, options);
+}
+
+/* 4. COLUMNAS APILADAS */
+function drawStackedChart() {
+    const st = getStats();
+    const data = google.visualization.arrayToDataTable([
+        ['Tipo', 'Hits', 'Ponches'],
+        ['Totales', st.hr + st.t + st.d + st.s, st.k]
+    ]);
+
+    const options = {
+        title: 'Hits vs Ponches',
+        titleTextStyle: { fontSize: 20, bold: true },
+        isStacked: true,
+        legend: { textStyle: { fontSize: 14 } },
+        vAxis: { textStyle: { fontSize: 14 } },
+        hAxis: { textStyle: { fontSize: 14 } }
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('stackedChart'));
+    chart.draw(data, options);
+}
+</script>
+
+
+
+
+</body>
+</html>

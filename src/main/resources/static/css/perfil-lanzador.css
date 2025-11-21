@@ -1,0 +1,228 @@
+/* ===== PERFIL-BATEADOR.CSS - UNA SOLA CAJA BLANCA PERFECTA ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/vanguardiaeluniversal/F7KFQKNTEBHLLAFA26UTKOTYVA.JPG') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+/* MINI HERO */
+.mini-hero {
+  padding: 1.5rem 0;
+  text-align: center;
+  border-bottom: 4px solid #FFD700;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero-logo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 6px;
+  border: 4px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255,215,0,0.6);
+}
+
+.hero-title {
+  color: white;
+  font-size: 1.9rem;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+
+/* VOLVER */
+.simple-nav {
+  background: rgba(0,53,128,0.98);
+  padding: 0.8rem 0;
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(45deg, #FFD700, #FFC107);
+  color: #003580;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+}
+
+.btn-back:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+}
+
+/* UNA SOLA CAJA BLANCA GRANDE */
+.profile-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.profile-card {
+  background: white;
+  padding: 4rem 3rem;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  max-width: 900px;
+  width: 100%;
+  border: 5px solid #FFD700;
+  text-align: center;
+}
+
+/* FOTO + NOMBRE */
+.player-header {
+  margin-bottom: 2.5rem;
+}
+
+.player-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 8px solid #FFD700;
+  box-shadow: 0 0 30px rgba(255,215,0,0.7);
+}
+
+.player-name {
+  color: #003580;
+  font-size: 2.5rem;
+  margin-top: 1.5rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.team-name {
+  color: #003580;
+  font-size: 1.5rem;
+  margin-top: 1.0rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,53,128,0.2);
+  margin: 2rem 0;
+}
+
+/* SECCIONES */
+.section-title {
+  color: #003580;
+  font-size: 1.8rem;
+  margin: 2.5rem 0 1.5rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 5px;
+  background: #FFD700;
+  margin: 1rem auto;
+  border-radius: 3px;
+}
+
+.player-details ul, .player-stats ul {
+  list-style: none;
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.player-details li, .player-stats li {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(0,53,128,0.1);
+}
+
+.player-details li:last-child, .player-stats li:last-child {
+  border-bottom: none;
+}
+
+.player-details strong, .player-stats strong {
+  color: #003580;
+  font-weight: 700;
+}
+
+/* GRÁFICOS GRANDES Y BIEN DISTRIBUIDOS */
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.chart {
+  width: 100%;
+  height: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  border: 3px solid #FFD700;
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+  background: linear-gradient(135deg, #003580, #002244);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+  border-top: 5px solid #FFD700;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #FFD700;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+  .player-photo {
+    width: 180px;
+    height: 180px;
+  }
+  .profile-card {
+    padding: 3rem 1.5rem;
+  }
+}

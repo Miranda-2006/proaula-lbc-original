@@ -1,0 +1,446 @@
+/* Estilos base */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/vanguardiaeluniversal/F7KFQKNTEBHLLAFA26UTKOTYVA.JPG') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 53, 128, 0.9) 0%, rgba(200, 16, 46, 0.9) 100%);
+  color: white;
+  border-bottom: 5px solid #FFD700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+header img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  animation: pulse 2s infinite alternate, float 6s ease-in-out infinite;
+  transition: transform 0.5s ease;
+}
+
+header img:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+header h1 {
+  font-size: 3rem;
+  margin: 1rem 0 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInDown 1s ease-out;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 1.5s ease-out;
+}
+
+header h2 {
+  font-size: 1.5rem;
+  color: #FFD700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: bounceIn 1s ease-out;
+}
+
+/* Navegación */
+nav {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 53, 128, 0.9);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  margin: 0 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #FFD700;
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: #FFD700;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Contenido principal */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 1s ease-out;
+  overflow: hidden;
+  position: relative;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M30,50 Q50,30 70,50 T90,50" fill="none" stroke="rgba(200, 16, 46, 0.05)" stroke-width="1"/></svg>');
+  z-index: 0;
+  pointer-events: none;
+}
+
+h2, h3 {
+  color: #003580;
+  position: relative;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #FFD700;
+  display: inline-block;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Video destacado */
+.video-destacado {
+  margin: 3rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: perspective(1000px) rotateX(0deg);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.video-destacado:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Botón */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background: linear-gradient(45deg, #003580, #C8102E);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  margin: 1rem 0;
+  box-shadow: 0 4px 15px rgba(0, 53, 128, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0, 53, 128, 0.6);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: rgba(0, 53, 128, 0.9);
+  color: white;
+  margin-top: 3rem;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #003580, #FFD700, #C8102E);
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.7); }
+  to { box-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.5); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Efectos especiales */
+.baseball-effect {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  border: 2px solid #C8102E;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: fly 15s linear infinite;
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100vw, -100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  nav {
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    padding: 0.5rem;
+    margin: 0.2rem;
+    font-size: 0.9rem;
+  }
+  
+  main {
+    padding: 0 1rem;
+  }
+  
+  .ganador {
+    color: blue;
+    font-weight: bold;
+  }
+  .perdedor {
+    color: red;
+    font-weight: bold;
+  }
+  .empate {
+    color: gray;
+    font-style: italic;
+  }
+  
+  .tabla-equipos {
+    margin: 3rem 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+  }
+
+  .tabla-equipos h3 {
+    text-align: center;
+    color: #C8102E;
+    margin-bottom: 1rem;
+  }
+
+  .tabla-container {
+    overflow-x: auto;
+  }
+
+  .tabla-equipos table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+
+  .tabla-equipos th,
+  .tabla-equipos td {
+    padding: 0.8rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tabla-equipos th {
+    background-color: #003580;
+    color: white;
+  }
+
+  .tabla-equipos tr:hover {
+    background-color: #f1f1f1;
+  }
+}
+/* Imagen del perfil del jugador (flotante) */
+.foto-jugador {
+  text-align: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.foto-jugador img.perfil-jugador {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  animation: pulse 2s infinite alternate, float 6s ease-in-out infinite;
+  transition: transform 0.5s ease;
+  background-color: white; /* por si la imagen tiene fondo transparente */
+}
+
+.foto-jugador img.perfil-jugador:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.foto-jugador h1 {
+  color: #003580;
+  font-size: 2.2rem;
+  margin-top: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 1s ease-out;
+}
+
+
+

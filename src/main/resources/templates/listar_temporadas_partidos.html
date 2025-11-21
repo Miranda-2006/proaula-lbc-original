@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Listar Temporadas - Crear y Editar Partidos</title>
+    <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+
+<header>
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+    <div>
+        <h2>Temporada Actual: 2025</h2>
+    </div>
+</header>
+
+<nav>
+  	<a href="/admin">Volver </a>
+  </nav>
+
+<main>
+    <section>
+        <h2>Temporadas Disponibles</h2>
+
+        <div th:if="${temporadas != null and !#lists.isEmpty(temporadas)}">
+            <div th:each="temporada : ${temporadas}" class="temporada-card"
+                 style="background-color: rgba(255,255,255,0.95); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+
+                <h3 th:text="${temporada.nombreTemporada}" style="margin-bottom: 1rem;">Nombre de Temporada</h3>
+
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <a th:href="@{'/admin/crear-partido/' + ${temporada.id}}" class="btn">Crear Partidos</a>
+                </div>
+
+                <div th:if="${temporada.partidosJugados != null and !#lists.isEmpty(temporada.partidosJugados)}">
+                    <ul>
+                        <li th:each="partido, iterStat : ${temporada.partidosJugados}" style="margin-bottom: 0.75rem;">
+							
+                            <h3>
+                                Partido [[${iterStat.index + 1}]]:
+                                <strong>[[${partido.nombreEquipoLocal}]]</strong> 
+                                (<span style="color:blue;">[[${partido.carrerasEquipoLocal}]]</span>)
+                                vs 
+                                <strong>[[${partido.nombreEquipoVisitante}]]</strong> 
+                                (<span style="color:red;">[[${partido.carrerasEquipoVisitante}]]</span>)
+                                - <em>[[${#temporals.format(partido.fecha, 'dd/MM/yyyy')}]] - [[${#temporals.format(partido.hora, 'hh:mm a')}]]</em>
+                                - <strong>[[${partido.estadio.nombre}]]</strong>
+                            </h3>
+
+                            <div style="margin-top: 0.3rem; display: flex; gap: 0.5rem;">
+                                <a th:href="@{'/admin/editar-partido/' + ${temporada.id} + '/' + ${iterStat.index}}" class="btn">Editar</a>
+                                <a th:href="@{'/admin/ver-partido/' + ${temporada.id} + '/' + ${iterStat.index}}" class="btn">Ver Detalles</a>
+                                <a th:href="@{'/admin/eliminar-partido/' + ${temporada.id} + '/' + ${iterStat.index}}"
+                                   class="btn" 
+                                   onclick="return confirm('¿Estás seguro de eliminar este partido?');">Eliminar</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div th:if="${temporada.partidosJugados == null or #lists.isEmpty(temporada.partidosJugados)}">
+                    <p style="color: gray;">No hay partidos registrados para esta temporada.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div th:if="${temporadas == null or #lists.isEmpty(temporadas)}">
+            <p>No hay temporadas disponibles.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

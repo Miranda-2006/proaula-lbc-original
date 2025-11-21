@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Jugadores Temporada</title>
+    <link rel="stylesheet" th:href="@{/css/jugadores-temporada.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO -->
+<header class="hero-compact">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <div class="hero-text">
+      <h1 class="hero-title" th:text="'Jugadores de la temporada: ' + ${temporada.nombreTemporada}">Jugadores de la Temporada</h1>
+      <p class="hero-subtitle">Listado de Equipos y Jugadores</p>
+    </div>
+  </div>
+</header>
+
+<!-- VOLVER -->
+<nav class="simple-nav">
+  <div class="nav-container">
+    <a href="/temporadas-jugadores" class="btn-back">Volver</a>
+  </div>
+</nav>
+
+<main class="contenido fade-in">
+  <section th:each="equipo, equipoStat : ${temporada.equiposParticipantes}" class="equipo-section">
+    <h2 class="equipo-title" th:text="'Equipo: ' + ${equipo.nombre}">Equipo</h2>
+
+    <!-- BATEADORES -->
+    <div class="tabla-wrapper">
+      <h3 class="tabla-subtitle">Bateadores</h3>
+      <table class="jugadores-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Posición</th>
+            <th>Home Runs</th>
+            <th>Triples</th>
+            <th>Dobles</th>
+            <th>Sencillos</th>
+            <th>Base por Bola</th>
+            <th>Base por Golpe</th>
+            <th>Ponches</th>
+            <th>Robo de Base</th>
+            <th>Carreras Impulsadas</th>
+            <th>Errores</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="bateador, bateadorStat : ${equipo.bateadores}">
+            <td th:text="${bateador.nombre}">Nombre</td>
+            <td th:text="${bateador.edad}">Edad</td>
+            <td th:text="${bateador.posicion}">Posición</td>
+            <td th:text="${bateador.homeRuns}">HR</td>
+            <td th:text="${bateador.triples}">3B</td>
+            <td th:text="${bateador.dobles}">2B</td>
+            <td th:text="${bateador.sencillos}">1B</td>
+            <td th:text="${bateador.basePorBola}">BB</td>
+            <td th:text="${bateador.basePorGolpe}">HBP</td>
+            <td th:text="${bateador.ponches}">K</td>
+            <td th:text="${bateador.roboDeBase}">SB</td>
+            <td th:text="${bateador.carrerasImpulsadas}">RBI</td>
+            <td th:text="${bateador.errores}">E</td>
+            <td>
+              <a th:href="@{'/perfil-bateador/' + ${temporada.id} + '/' + ${equipoStat.index} + '/' + ${bateadorStat.index}}" class="btn-table">
+                Ver Perfil
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LANZADORES -->
+    <div class="tabla-wrapper">
+      <h3 class="tabla-subtitle">Lanzadores</h3>
+      <table class="jugadores-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Posición</th>
+            <th>Lanzamientos</th>
+            <th>Innings</th>
+            <th>Ponchados</th>
+            <th>BB</th>
+            <th>Carreras</th>
+            <th>Hits</th>
+            <th>AP</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="lanzador, lanzadorStat : ${equipo.lanzadores}">
+            <td th:text="${lanzador.nombre}">Nombre</td>
+            <td th:text="${lanzador.edad}">Edad</td>
+            <td th:text="${lanzador.posicion}">Posición</td>
+            <td th:text="${lanzador.numeroLanzamientos}">Lanz.</td>
+            <td th:text="${lanzador.inningsLanzados}">IP</td>
+            <td th:text="${lanzador.ponchados}">K</td>
+            <td th:text="${lanzador.basePorBola}">BB</td>
+            <td th:text="${lanzador.carrerasPermitidas}">R</td>
+            <td th:text="${lanzador.hitsPermitidos}">H</td>
+            <td th:text="${lanzador.aparicionesPlato}">AP</td>
+            <td>
+              <a th:href="@{'/perfil-lanzador/' + ${temporada.id} + '/' + ${equipoStat.index} + '/' + ${lanzadorStat.index}}" class="btn-table">
+                Ver Perfil
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

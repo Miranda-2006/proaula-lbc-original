@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Estado de Partidos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h1>Temporada: <span th:text="${temporada.nombreTemporada}"></span> (<span th:text="${temporada.anio}"></span>)</h1>
+
+    <h2>⚾ Partidos en Juego</h2>
+    <div th:if="${partidosEnJuego.size() > 0}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Visitante</th>
+                    <th>Estadio</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="partido : ${partidosEnJuego}">
+                    <td th:text="${partido.equipoLocal.nombreEquipo}">Equipo Local</td>
+                    <td th:text="${partido.equipoVisitante.nombreEquipo}">Equipo Visitante</td>
+                    <td th:text="${partido.estadio.nombre}">Estadio</td>
+                    <td th:text="${partido.estadoPartido}">Estado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${partidosEnJuego.size() == 0}">
+        <p>No hay partidos en juego actualmente.</p>
+    </div>
+
+    <h2>✅ Partidos Finalizados</h2>
+    <div th:if="${partidosFinalizados.size() > 0}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Carreras</th>
+                    <th>Visitante</th>
+                    <th>Carreras</th>
+                    <th>Estadio</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="partido : ${partidosFinalizados}">
+                    <td th:text="${partido.equipoLocal.nombreEquipo}">Local</td>
+                    <td th:text="${partido.carrerasEquipoLocal}">0</td>
+                    <td th:text="${partido.equipoVisitante.nombreEquipo}">Visitante</td>
+                    <td th:text="${partido.carrerasEquipoVisitante}">0</td>
+                    <td th:text="${partido.estadio.nombre}">Estadio</td>
+                    <td th:text="${partido.estadoPartido}">FINALIZADO</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${partidosFinalizados.size() == 0}">
+        <p>No hay partidos finalizados aún.</p>
+    </div>
+
+    <a th:href="@{/admin/listar-temporadas-partidos}">Volver</a>
+</body>
+</html>

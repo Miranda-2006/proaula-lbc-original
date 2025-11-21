@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${estadio.id != null} ? 'Editar Estadio' : 'Crear Estadio'">Crear / Editar Estadio</title>
+    <link rel="stylesheet" href="/css/stylehome.css" />
+</head>
+<body>
+  
+  <header>
+  	    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+  	    <h1>Liga de Béisbol de Cartagena</h1>
+  	    <p>Bienvenido al sistema de gestión de la liga</p>
+		<div>
+		  <h2 th:text="${estadio.id != null} ? 'Editar Estadio' : 'Crear Estadio'">Crear / Editar Estadio</h2>
+		</div>
+  	</header>
+
+  <nav>
+  	    <a href="/admin/listar-temporadas-estadios">Volver</a>
+  	  </nav>
+
+  <main class="contenido">
+    <section>
+      <form th:action="@{'/admin/crear-estadio/' + ${idTemporada}}" method="post" style="max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 1.5rem;">
+        <input type="hidden" name="idTemporada" th:value="${idTemporada}" />
+        <input type="hidden" name="temporadaId" th:value="${temporadaId}" />
+		
+        <div style="display: flex; flex-direction: column;">
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            th:value="${estadio.nombre}"
+            required
+            style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;"
+          />
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+          <label for="ubicacion">Ubicación:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            th:value="${estadio.ubicacion}"
+            required
+            style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;"
+          />
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <button
+            type="submit"
+            class="btn"
+            th:text="${estadio.id != null} ? 'Guardar Cambios' : 'Crear Estadio'"
+            style="flex: 1;"
+          >
+            Guardar
+          </button>
+          <a href="/admin/listar-temporadas-estadios" class="btn btn-secondary" style="flex: 1; text-align: center; padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; background: #eee; text-decoration: none; color: #333;">
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+</body>
+</html>

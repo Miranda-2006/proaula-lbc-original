@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Estadios - Liga de Béisbol de Cartagena</title>
+    <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+
+<header>
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Gestión de Estadios</p>
+</header>
+
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/equipos">Equipos</a>
+    <a href="/jugadores">Jugadores</a>
+    <a href="/estadios">Estadios</a>
+</nav>
+
+<main>
+    <section>
+        <h2>Estadios Disponibles</h2>
+
+        <div th:if="${estadios != null and !#lists.isEmpty(estadios)}">
+            <div th:each="estadio : ${estadios}" class="estadio-card"
+                 style="background-color: rgba(255,255,255,0.95); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+
+                <h3 th:text="${estadio.nombre}" style="margin-bottom: 1rem;">Nombre Estadio</h3>
+                <p><strong>Ubicación:</strong> <span th:text="${estadio.ubicacion}">Ubicación</span></p>
+
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a th:href="@{'/admin/editar-estadio/' + ${estadio.id}}" class="btn">✏️ Editar</a>
+                    <a th:href="@{'/admin/eliminar-estadio/' + ${estadio.id}}"
+                       class="btn"
+                       onclick="return confirm('¿Estás seguro de eliminar este estadio?');"
+                       style="background: linear-gradient(45deg, #8B0000, #C8102E);">🗑️ Eliminar</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${estadios == null or #lists.isEmpty(estadios)}">
+            <p>No hay estadios registrados.</p>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <a href="/admin/crear-estadio" class="btn">➕ Crear Nuevo Estadio</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

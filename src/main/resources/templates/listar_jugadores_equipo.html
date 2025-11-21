@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugadores del Equipo</title>
+<link rel="stylesheet" th:href="@{/css/jugadores-equipo.css}">
+</head>
+<body>
+
+	<header class="hero-compact">
+	  <div class="hero-inner">
+	    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+	    <div class="hero-text">
+	      <h1 class="hero-title">Liga de Béisbol de Cartagena</h1>
+	      <p class="hero-subtitle" th:text="'Jugadores del Equipo: ' + ${equipo.nombre}">Jugadores del Equipo</p>
+	    </div>
+	  </div>
+	</header>
+		
+<nav>
+	<a th:href="@{/admin/jugadores/seleccionar(idTemporada=${idTemporada})}" >Volver </a>
+</nav>
+
+<main>
+    <section>
+        <h2>Bateadores</h2>
+        <ul th:if="${equipo.bateadores != null and !#lists.isEmpty(equipo.bateadores)}">
+			<li th:each="bateador, iterStat : ${equipo.bateadores}">
+			    <strong th:text="${bateador.nombre}">Nombre</strong> 
+			    <span th:text="${bateador.posicion}">Posición</span>
+				<br>
+			    <!-- Botón para ver perfil del bateador -->
+			    <a th:href="@{'/admin/perfil-bateador/' + ${idTemporada} + '/' + ${indexEquipo} + '/' + ${iterStat.index}}" class="btn">
+			        Ver Perfil
+			    </a>
+			</li>
+        </ul>
+        <p th:if="${equipo.bateadores == null or #lists.isEmpty(equipo.bateadores)}">No hay bateadores registrados.</p>
+    </section>
+
+	<section>
+	    <h2>Lanzadores</h2>
+	    <ul th:if="${equipo.lanzadores != null and !#lists.isEmpty(equipo.lanzadores)}">
+	        <li th:each="lanzador, iterStat : ${equipo.lanzadores}">
+	            <strong th:text="${lanzador.nombre}">Nombre</strong>
+	            <span th:text="${lanzador.posicion}">Posición</span>
+	            <br>
+	            <a th:href="@{'/admin/perfil-lanzador/' + ${idTemporada} + '/' + ${indexEquipo} + '/' + ${iterStat.index}}" class="btn">
+	                Ver Perfil
+	            </a>
+	        </li>
+	    </ul>
+	    <p th:if="${equipo.lanzadores == null or #lists.isEmpty(equipo.lanzadores)}">No hay lanzadores registrados.</p>
+	</section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

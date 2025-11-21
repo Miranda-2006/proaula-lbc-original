@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesión cerrada</title>
+    <link rel="stylesheet" th:href="@{/css/stylehome.css}">
+</head>
+<body>
+
+    <main style="max-width: 500px; margin: 8rem auto; padding: 2rem; text-align: center; background-color: rgba(255,255,255,0.95); border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+        <h2 style="color: #003580; margin-bottom: 1.5rem;">Has cerrado sesión correctamente</h2>
+        <p style="margin-bottom: 2rem;">Gracias por visitarnos. ¡Esperamos verte pronto de nuevo!</p>
+
+        <a th:href="@{/login}" class="btn">Continuar</a>
+    </main>
+
+</body>
+</html>

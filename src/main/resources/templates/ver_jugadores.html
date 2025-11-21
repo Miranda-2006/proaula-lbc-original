@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Jugadores por Equipo - Liga de Béisbol de Cartagena</title>
+    <link rel="stylesheet" th:href="@{/css/stylehome.css}" />
+</head>
+<body>
+
+<header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+    <div>
+        <h2>Jugadores - Temporada [[${temporada.nombreTemporada}]]</h2>
+    </div>
+	<nav>
+		<a th:href="@{/admin/jugadores/seleccionar(idTemporada=${idTemporada})}" >Volver</a>
+	</nav>
+</header>
+
+<main>
+    <section th:each="equipo, index : ${temporada.equiposParticipantes}">
+        <h2>Equipo: [[${equipo.nombre}]]</h2>
+
+        <h3>Bateadares</h3>
+        <ul th:if="${equipo.bateadores != null && !equipo.bateadores.isEmpty()}">
+            <li th:each="b : ${equipo.bateadores}">
+                [[${b.nombre}]] - Edad: [[${b.edad}]] - Posición: [[${b.posicion}]]
+            </li>
+        </ul>
+        <p th:if="${equipo.bateadores == null || equipo.bateadores.isEmpty()}">Sin bateadores registrados.</p>
+
+        <h3>Lanzadores</h3>
+        <ul th:if="${equipo.lanzadores != null && !equipo.lanzadores.isEmpty()}">
+            <li th:each="l : ${equipo.lanzadores}">
+                [[${l.nombre}]] - Edad: [[${l.edad}]] - Posición: [[${l.posicion}]]
+            </li>
+        </ul>
+        <p th:if="${equipo.lanzadores == null || equipo.lanzadores.isEmpty()}">Sin lanzadores registrados.</p>
+
+        <!-- Botones para agregar más jugadores -->
+        <a th:href="@{/admin/agregar-bateador/{id}/{i}(id=${temporada.id}, i=${index.index})}" class="btn">Agregar Bateador</a>
+        <a th:href="@{/admin/agregar-lanzador/{id}/{i}(id=${temporada.id}, i=${index.index})}" class="btn">Agregar Lanzador</a>
+        <hr>
+    </section>
+
+    <!-- Sección especial para agentes libres -->
+    <section>
+        <h2>Agentes Libres</h2>
+        <a th:href="@{/admin/agregar-bateador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Bateador Libre</a>
+        <a th:href="@{/admin/agregar-lanzador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Lanzador Libre</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporadas Disponibles</title>
+    <link rel="stylesheet" th:href="@{/css/temporadas.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO  -->
+<header class="hero-compact">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <div class="hero-text">
+      <h1 class="hero-title">Liga de Béisbol de Cartagena</h1>
+      <p class="hero-subtitle">Bienvenido al sistema de gestión de la liga</p>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="/" class="nav-link">Volver</a>
+    <a href="/listar-partidos" class="nav-link">Partidos</a>
+  </div>
+</nav>
+
+<main class="contenido">
+  <h2 class="section-title">Temporadas Disponibles</h2>
+
+  <div class="temporadas-grid">
+    <a th:each="temporada : ${temporadas}"
+       th:href="@{'/temporadas-jugadores/' + ${temporada.id}}"
+       class="temporada-card"
+       th:text="${temporada.nombreTemporada}">
+      Temporada
+    </a>
+  </div>
+
+  <p th:if="${#lists.isEmpty(temporadas)}" class="no-data">No hay temporadas disponibles.</p>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

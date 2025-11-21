@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil de Jugador Lanzador</title>
+    <link rel="stylesheet" th:href="@{/css/perfil-lanzador.css}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+	<!-- MINI HERO -->
+	<header class="mini-hero">
+	  <div class="hero-inner">
+	    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+	    <h1 class="hero-title">Perfil de Lanzador</h1>
+	  </div>
+	</header>
+
+<!-- VOLVER -->
+	<nav class="simple-nav">
+	  <div class="nav-container">
+	    <a th:href="@{/admin/listar-jugadores-equipo/{idTemporada}/{indexEquipo}(idTemporada=${idTemporada}, indexEquipo=${indexEquipo})}" class="btn-back">Volver</a>
+	  </div>
+	</nav>
+	
+<main class="profile-content">
+    <!-- Contenido Principal -->
+	<div class="profile-card">
+
+	  <!-- FOTO + NOMBRE -->
+	<div class="player-header">
+	    <img th:src="@{/admin/jugador-lanzador/foto/{nombre}(nombre=${lanzador.nombre})}"
+	         class="player-photo">
+
+	    <h2 class="player-name" th:text="${lanzador.nombre}">Nombre Jugador</h2>
+
+	    <!-- ⭐ Equipo donde juega -->
+	    <h3 class="team-name">
+	       <span th:text="${equipoNombre}"></span>
+	    </h3>
+
+		<br>
+		
+	    <!-- ⭐ Logo del equipo -->
+		    <img th:src="@{'/admin/imagen-equipo/' + ${equipo.nombre}}"
+		         style="width: 100px; height: 110px; object-fit: cover; border-radius: 8px;">
+		</td>
+
+	</div>
+	<hr class="divider">
+	
+	<!-- DETALLES -->
+	<div class="player-details">
+	  <h3 class="section-title">Detalles del Jugador</h3>
+	  <ul>
+	    <li><strong>Edad:</strong> <span th:text="${lanzador.edad}">0</span> años</li>
+	    <li><strong>Posición:</strong> <span th:text="${lanzador.posicion}">Posición</span></li>
+	    <li><strong>Mano de Lanzamiento:</strong> <span th:text="${lanzador.derecho_zurdo}">Derecho/Zurdo</span></li>
+	  </ul>
+	</div>
+	
+	<!-- ESTADÍSTICAS -->
+	<div class="player-stats">
+	  <h3 class="section-title">Estadísticas de Pitcheo</h3>
+	  <ul>
+	    <li><strong>Número de Lanzamientos:</strong> <span th:text="${lanzador.numeroLanzamientos}"></span></li>
+	    <li><strong>Innings Lanzados:</strong> <span th:text="${lanzador.inningsLanzados}"></span></li>
+	    <li><strong>Ponchados (K):</strong> <span th:text="${lanzador.ponchados}"></span></li>
+	    <li><strong>Bases por Bola (BB):</strong> <span th:text="${lanzador.basePorBola}"></span></li>
+	    <li><strong>Carreras Permitidas:</strong> <span th:text="${lanzador.carrerasPermitidas}"></span></li>
+		<li><strong>Hits Permitidos:</strong> <span th:text="${lanzador.hitsPermitidos}"></span></li>
+		<li><strong>Apariciones:</strong> <span th:text="${lanzador.aparicionesPlato}"></span></li>
+	  </ul>
+	</div>
+
+
+	<hr class="divider">
+		<section>
+			<!-- GRÁFICOS DE PITCHEO -->
+			<div class="charts-container">
+			    <h3 class="section-title">Gráficos</h3>
+
+			    <!-- 1. Pie Chart -->
+			    <div id="pieChart" class="chart"
+			         th:data-ponchados="${lanzador.ponchados}"
+			         th:data-bb="${lanzador.basePorBola}"
+			         th:data-carreras="${lanzador.carrerasPermitidas}"
+			         th:data-hits="${lanzador.hitsPermitidos}">
+			    </div>
+
+			    <!-- 2. Bar Chart -->
+			    <div id="barChart" class="chart"
+			         th:data-ponchados="${lanzador.ponchados}"
+			         th:data-bb="${lanzador.basePorBola}"
+			         th:data-carreras="${lanzador.carrerasPermitidas}"
+			         th:data-hits="${lanzador.hitsPermitidos}">
+			    </div>
+
+			    <!-- 3. Bar Chart Horizontal -->
+			    <div id="barChartHorizontal" class="chart"
+			         th:data-ponchados="${lanzador.ponchados}"
+			         th:data-bb="${lanzador.basePorBola}"
+			         th:data-carreras="${lanzador.carrerasPermitidas}"
+			         th:data-hits="${lanzador.hitsPermitidos}">
+			    </div>
+
+			    <!-- 4. Stacked Column Chart -->
+			    <div id="stackedChart" class="chart"
+			         th:data-ponchados="${lanzador.ponchados}"
+			         th:data-bb="${lanzador.basePorBola}"
+			         th:data-carreras="${lanzador.carrerasPermitidas}"
+			         th:data-hits="${lanzador.hitsPermitidos}">
+			    </div>
+			</div>
+		</section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+    </footer>
+
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script>
+	google.charts.load('current', { packages: ['corechart', 'bar'] });
+	google.charts.setOnLoadCallback(drawCharts);
+
+	function drawCharts() {
+	    drawPieChart();
+	    drawBarChart();
+	    drawHorizontalBarChart();
+	    drawStackedChart();
+	}
+
+	/* ╔══════════════════════════════╗
+	   ║ Obtener estadísticas del lanzador ║
+	   ╚══════════════════════════════╝ */
+	function getStats() {
+	    const div = document.getElementById('pieChart');
+	    return {
+	        ponchados: Number(div.dataset.ponchados || 0),
+	        bb: Number(div.dataset.bb || 0),
+	        carreras: Number(div.dataset.carreras || 0),
+	        hits: Number(div.dataset.hits || 0)
+	    };
+	}
+
+	/* ╔══════════════════════════════╗
+	   ║ 1. GRÁFICA DE PASTEL/DONUT   ║
+	   ╚══════════════════════════════╝ */
+	function drawPieChart() {
+	    const st = getStats();
+	    const data = google.visualization.arrayToDataTable([
+	        ['Estadística', 'Cantidad'],
+	        ['Ponchados (K)', st.ponchados],
+	        ['Bases por Bola (BB)', st.bb],
+	        ['Carreras Permitidas', st.carreras],
+	        ['Hits Permitidos', st.hits]
+	    ]);
+
+	    const options = {
+	        title: 'Distribución de Rendimiento del Lanzador',
+	        titleTextStyle: { fontSize: 20, bold: true },
+	        pieHole: 0.4,
+	        colors: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'],
+	        legend: { textStyle: { fontSize: 14 } }
+	    };
+
+	    const chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+	    chart.draw(data, options);
+	}
+
+	/* ╔══════════════════════════════╗
+	   ║ 2. BARRAS VERTICALES         ║
+	   ╚══════════════════════════════╝ */
+	function drawBarChart() {
+	    const st = getStats();
+	    const data = google.visualization.arrayToDataTable([
+	        ['Estadística', 'Cantidad', { role: 'style' }],
+	        ['Ponchados (K)', st.ponchados, '#36A2EB'],
+	        ['Bases por Bola (BB)', st.bb, '#FF6384'],
+	        ['Carreras Permitidas', st.carreras, '#FFCE56'],
+	        ['Hits Permitidos', st.hits, '#4BC0C0']
+	    ]);
+
+	    const options = {
+	        title: 'Resumen de Estadísticas del Lanzador',
+	        titleTextStyle: { fontSize: 20, bold: true },
+	        legend: { position: 'none' },
+	        vAxis: { minValue: 0, format: '0', textStyle: { fontSize: 14 } },
+	        hAxis: { textStyle: { fontSize: 14 } },
+	    };
+
+	    const chart = new google.visualization.ColumnChart(document.getElementById('barChart'));
+	    chart.draw(data, options);
+	}
+
+	/* ╔══════════════════════════════╗
+	   ║ 3. BARRAS HORIZONTALES       ║
+	   ╚══════════════════════════════╝ */
+	function drawHorizontalBarChart() {
+	    const st = getStats();
+	    const data = google.visualization.arrayToDataTable([
+	        ['Estadística', 'Cantidad'],
+	        ['Ponchados (K)', st.ponchados],
+	        ['Bases por Bola (BB)', st.bb],
+	        ['Carreras Permitidas', st.carreras],
+	        ['Hits Permitidos', st.hits]
+	    ]);
+
+	    const options = {
+	        title: 'Comparación Horizontal',
+	        titleTextStyle: { fontSize: 20, bold: true },
+	        legend: { textStyle: { fontSize: 14 } },
+	        vAxis: { textStyle: { fontSize: 14 } },
+	        hAxis: { textStyle: { fontSize: 14 } },
+	    };
+
+	    const chart = new google.visualization.BarChart(document.getElementById('barChartHorizontal'));
+	    chart.draw(data, options);
+	}
+
+	/* ╔══════════════════════════════╗
+	   ║ 4. COLUMNAS APILADAS         ║
+	   ╚══════════════════════════════╝ */
+	function drawStackedChart() {
+	    const st = getStats();
+	    const data = google.visualization.arrayToDataTable([
+	        ['Tipo', 'Ponchados', 'Otros'],
+	        ['Totales', st.ponchados, st.bb + st.carreras + st.hits]
+	    ]);
+
+	    const options = {
+	        title: 'Ponchados vs Otros Permitidos',
+	        titleTextStyle: { fontSize: 20, bold: true },
+	        isStacked: true,
+	        legend: { textStyle: { fontSize: 14 } },
+	        vAxis: { textStyle: { fontSize: 14 } },
+	        hAxis: { textStyle: { fontSize: 14 } },
+	    };
+
+	    const chart = new google.visualization.ColumnChart(document.getElementById('stackedChart'));
+	    chart.draw(data, options);
+	}
+	</script>
+
+
+	
+
+</body>
+</html>

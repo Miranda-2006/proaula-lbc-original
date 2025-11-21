@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jugadores de la Temporada</title>
+  <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+    <div>
+      <h2 th:text="'Temporada Actual: ' + ${temporada.anio}"></h2>
+    </div>
+  </header>
+
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/temporadas">Temporadas</a>
+    <a href="/temporadas-jugadores">Jugadores</a>
+    <a href="#descripcion">¿Qué es?</a>
+  </nav>
+
+  <main>
+    <header>
+      <h1>Jugadores de la Temporada [[${temporada.nombre}]]</h1>
+      <a th:href="@{/admin}" class="btn">Volver al Panel</a>
+    </header>
+
+    <section>
+      <h2>Equipos Participantes</h2>
+      <div th:each="equipo, index : ${temporada.equiposParticipantes}">
+        <h3>[[${equipo.nombre}]]</h3>
+
+        <h4>Bateadores</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th><th>Edad</th><th>Posición</th><th>Lado</th><th>Promedio</th><th>HR</th><th>3B</th><th>2B</th><th>1B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="b : ${equipo.bateadores}">
+              <td>[[${b.nombre}]]</td>
+              <td>[[${b.edad}]]</td>
+              <td>[[${b.posicion}]]</td>
+              <td>[[${b.derecho_zurdo}]]</td>
+              <td th:text="${#numbers.formatDecimal(b.promedioBateo, 1, 3)}"></td>
+              <td>[[${b.homeRuns}]]</td>
+              <td>[[${b.triples}]]</td>
+              <td>[[${b.dobles}]]</td>
+              <td>[[${b.sencillos}]]</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Lanzadores</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th><th>Edad</th><th>Posición</th><th>Lado</th><th>ERA</th><th>Innings</th><th>Ponchados</th><th>BB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="l : ${equipo.lanzadores}">
+              <td>[[${l.nombre}]]</td>
+              <td>[[${l.edad}]]</td>
+              <td>[[${l.posicion}]]</td>
+              <td>[[${l.derecho_zurdo}]]</td>
+              <td th:text="${#numbers.formatDecimal(l.ERA, 1, 2)}"></td>
+              <td>[[${l.inningsLanzados}]]</td>
+              <td>[[${l.ponchados}]]</td>
+              <td>[[${l.basePorBola}]]</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a th:href="@{/admin/agregar-bateador/{idTemporada}/{index}(idTemporada=${temporada.id}, index=${index.index})}" class="btn">Agregar Bateador</a>
+        <a th:href="@{/admin/agregar-lanzador/{idTemporada}/{index}(idTemporada=${temporada.id}, index=${index.index})}" class="btn">Agregar Lanzador</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Agentes Libres</h2>
+
+      <h4>Bateadores Libres</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th><th>Edad</th><th>Posición</th><th>Lado</th><th>Promedio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="b : ${temporada.agentesLibresBateadores}">
+            <td>[[${b.nombre}]]</td>
+            <td>[[${b.edad}]]</td>
+            <td>[[${b.posicion}]]</td>
+            <td>[[${b.derecho_zurdo}]]</td>
+            <td th:text="${#numbers.formatDecimal(b.promedioBateo, 1, 3)}"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Lanzadores Libres</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th><th>Edad</th><th>Posición</th><th>Lado</th><th>ERA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="l : ${temporada.agentesLibresLanzadores}">
+            <td>[[${l.nombre}]]</td>
+            <td>[[${l.edad}]]</td>
+            <td>[[${l.posicion}]]</td>
+            <td>[[${l.derecho_zurdo}]]</td>
+            <td th:text="${#numbers.formatDecimal(l.ERA, 1, 2)}"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <a th:href="@{/admin/agregar-bateador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Bateador Libre</a>
+      <a th:href="@{/admin/agregar-lanzador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Lanzador Libre</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+</body>
+</html>

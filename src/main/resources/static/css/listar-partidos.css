@@ -1,0 +1,262 @@
+/* ===== LISTAR-PARTIDOS.CSS - CON ANIMACIONES DE ENTRADA ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/vanguardiaeluniversal/F7KFQKNTEBHLLAFA26UTKOTYVA.JPG') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+/* HERO COMPACTO */
+.hero-compact {
+  background: linear-gradient(135deg, rgba(0, 53, 128, 0.95) 0%, rgba(200, 16, 46, 0.95) 100%);
+  color: white;
+  padding: 1.2rem 0;
+  border-bottom: 4px solid #FFD700;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.hero-logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 6px;
+  border: 4px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-title {
+  font-size: 2.1rem;
+  margin: 0 0 0.3rem 0;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #FFD700;
+  font-weight: 500;
+}
+
+/* NAV */
+.main-nav {
+  background: rgba(0,53,128,0.98);
+  padding: 0.8rem 0;
+  text-align: center;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255,215,0,0.2);
+  color: #FFD700;
+}
+
+/* CONTENIDO */
+.contenido {
+  flex: 1;
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+/* TEMPORADA CARD */
+.temporada-card {
+  background: rgba(255,255,255,0.95);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  margin-bottom: 2.5rem;
+  border: 3px solid #FFD700;
+}
+
+.temporada-card h3 {
+  color: #003580;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.temporada-card h3::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #FFD700;
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+/* PARTIDOS */
+.partidos-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.partido-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.partido-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.partido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.partido-numero {
+  font-weight: 700;
+  color: #003580;
+}
+
+.partido-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.equipo-local, .equipo-visitante {
+  color: #003580;
+}
+
+.score-local { color: #003580; }
+.score-visitante { color: #C8102E; }
+
+.vs {
+  color: #FFD700;
+  font-size: 1.4rem;
+}
+
+.no-partidos, .no-temporadas {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 2rem;
+  font-size: 1.1rem;
+}
+
+/* FOOTER */
+.page-footer {
+  background: rgba(0,53,128,0.95);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.page-footer p {
+  margin: 0;
+  color: #FFD700;
+}
+
+/* ===== ANIMACIONES DE ENTRADA ===== */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.temporada-card {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.partido-card {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Delay para efecto cascada */
+.temporada-card:nth-child(1), .partido-card:nth-child(1) { animation-delay: 0.2s; }
+.temporada-card:nth-child(2), .partido-card:nth-child(2) { animation-delay: 0.4s; }
+.temporada-card:nth-child(3), .partido-card:nth-child(3) { animation-delay: 0.6s; }
+.temporada-card:nth-child(4), .partido-card:nth-child(4) { animation-delay: 0.8s; }
+.temporada-card:nth-child(5), .partido-card:nth-child(5) { animation-delay: 1s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .partido-header { flex-direction: column; text-align: center; }
+  .partido-score { font-size: 1.4rem; }
+}

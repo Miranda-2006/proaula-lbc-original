@@ -1,0 +1,229 @@
+/* ===== JUGADORES-TEMPORADA.CSS - CAJAS POR EQUIPO EN FILA ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/vanguardiaeluniversal/F7KFQKNTEBHLLAFA26UTKOTYVA.JPG') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+/* HERO COMPACTO */
+.hero-compact {
+  background: linear-gradient(135deg, rgba(0, 53, 128, 0.95) 0%, rgba(200, 16, 46, 0.95) 100%);
+  color: white;
+  padding: 1.2rem 0;
+  border-bottom: 4px solid #FFD700;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.hero-logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 6px;
+  border: 4px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255,215,0,0.6);
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-title {
+  font-size: 2.1rem;
+  margin: 0 0 0.3rem 0;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #FFD700;
+  font-weight: 500;
+}
+
+/* VOLVER */
+.simple-nav {
+  background: rgba(0,53,128,0.98);
+  padding: 0.8rem 0;
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(45deg, #FFD700, #FFC107);
+  color: #003580;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+}
+
+.btn-back:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+}
+
+/* CONTENIDO */
+.contenido {
+  flex: 1;
+  max-width: 1300px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+/* CAJA POR EQUIPO (una debajo de la otra) */
+.equipo-section {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  margin-bottom: 3rem;
+  border: 4px solid #FFD700;
+}
+
+/* TÍTULO DE EQUIPO */
+.equipo-title {
+  color: #003580;
+  font-size: 1.9rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.equipo-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 5px;
+  background: #FFD700;
+  margin: 1rem auto;
+  border-radius: 3px;
+}
+
+/* TABLAS DENTRO DE LA CAJA */
+.tabla-wrapper {
+  margin-top: 2rem;
+  overflow-x: auto; /* Scroll horizontal en móvil si es necesario */
+}
+
+.tabla-subtitle {
+  color: #003580;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.jugadores-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 0.9rem;
+}
+
+.jugadores-table th {
+  background: #003580;
+  color: white;
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.jugadores-table td {
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.jugadores-table tr:hover {
+  background: #f0f8ff;
+}
+
+/* BOTÓN VER PERFIL */
+.btn-table {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(45deg, #003580, #C8102E);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-table:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,53,128,0.4);
+}
+
+/* ANIMACIÓN DE ENTRADA */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.equipo-section {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.equipo-section:nth-child(1) { animation-delay: 0.2s; }
+.equipo-section:nth-child(2) { animation-delay: 0.4s; }
+.equipo-section:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FOOTER */
+.page-footer {
+  background: rgba(0,53,128,0.95);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.page-footer p {
+  margin: 0;
+  color: #FFD700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .jugadores-table { font-size: 0.8rem; }
+  .jugadores-table th, .jugadores-table td { padding: 0.6rem 0.3rem; }
+}

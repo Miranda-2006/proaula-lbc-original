@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Detalles del Partido - Liga de Béisbol de Cartagena</title>
+    <link rel="stylesheet" th:href="@{/css/stylehome.css}" />
+</head>
+<body>
+
+<header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+</header>
+
+<nav>
+	    <a href="/admin/listar-temporadas-partidos">Volver</a>
+	  </nav>
+
+<main>
+    <section style="background-color: white; padding: 1.5rem; border-radius: 10px; max-width: 600px; margin: 2rem auto; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <h2 th:text="${temporada.nombreTemporada}">Nombre de Temporada</h2>
+
+        <p><strong>Equipo Local:</strong> <span th:text="${partido.nombreEquipoLocal}">Local</span></p>
+        <p><strong>Equipo Visitante:</strong> <span th:text="${partido.nombreEquipoVisitante}">Visitante</span></p>
+        <p><strong>Fecha:</strong> <span th:text="${partido.fecha}">Fecha</span></p>
+        <p><strong>Hora:</strong> <span th:text="${partido.hora}">Hora</span></p>
+        <p><strong>Estadio:</strong> <span th:text="${partido.estadio.nombre}">Estadio</span></p>
+        <p><strong>Marcador:</strong> 
+            <span th:text="${partido.carrerasEquipoLocal}">0</span> - 
+            <span th:text="${partido.carrerasEquipoVisitante}">0</span>
+        </p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

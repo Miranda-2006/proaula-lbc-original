@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Temporada - Liga de Béisbol</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}">
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+  </header>
+
+  <!-- Navegación -->
+  <nav>
+    <a href="/admin/listar-temporadas">Volver</a>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="contenido" style="max-width: 700px; margin: auto; padding: 2rem;">
+    <h2 style="text-align: center; margin-bottom: 1rem;">Editar Temporada</h2>
+
+    <form th:action="@{'/admin/editar-temporada/' + ${temporada.id}}" method="post"
+          style="background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+
+      <label for="nombreTemporada" style="display: block; margin-bottom: 0.5rem;">Nombre de la Temporada:</label>
+      <input type="text" id="nombreTemporada" name="nombreTemporada" th:value="${temporada.nombreTemporada}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <label for="anio" style="display: block; margin-bottom: 0.5rem;">Año:</label>
+      <input type="number" id="anio" name="anio" th:value="${temporada.anio}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <div style="text-align: center;">
+        <button type="submit" class="btn" style="margin-right: 1rem;">💾 Guardar Cambios</button>
+		<br>
+        <a th:href="@{/admin/listar-temporadas}" class="btn btn-secondary"
+           style="background: linear-gradient(45deg, #555, #888); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">
+           ❌ Cancelar
+        </a>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+
+</body>
+</html>

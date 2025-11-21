@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrar Equipos</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}">
+</head>
+<body>
+
+<header id="inicio">
+  <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+  <h1>Liga de Béisbol de Cartagena</h1>
+  <p>Gestión de equipos por temporada</p>
+  <div><h2>Panel de Administración</h2></div>
+</header>
+
+<nav>
+  <a href="/admin">Volver</a>
+</nav>
+
+<main>
+
+  <!-- BUSCADOR GENERAL DE TEMPORADAS -->
+  <form th:action="@{/admin/listar-equipos/buscar-temporada}" method="get" style="margin-top:20px;">
+      <input type="text" name="filtro" placeholder="Buscar temporada por año o nombre">
+      <button type="submit">Buscar</button>
+      <a th:href="@{/admin/listar-equipos}">
+          <button type="button">Limpiar</button>
+      </a>
+  </form>
+
+  <section th:each="temporada : ${temporadas}">
+    <h2 th:text="${temporada.nombreTemporada + ' (' + temporada.anio + ')'}">Nombre de la temporada</h2>
+    <br>
+
+    <a th:href="@{'/admin/crear-equipo/' + ${temporada.id}}" class="btn">➕ Crear Equipo</a>
+    <br><br>
+
+    <!-- BUSCADOR DE EQUIPOS DE LA TEMPORADA -->
+	<form th:action="@{/admin/listar-equipos/buscar-equipo}" method="get" style="margin:10px 0;">
+	    <input type="hidden" name="temporadaId" th:value="${temporada.id}">
+	    <input type="text" name="filtro" placeholder="Buscar equipo en esta temporada">
+	    <button type="submit">Buscar</button>
+	    <a th:href="@{/admin/listar-equipos}">
+	        <button type="button">Limpiar</button>
+	    </a>
+	</form>
+
+    <br>
+
+    <!-- SI NO TIENE EQUIPOS -->
+    <div th:if="${#lists.isEmpty(temporada.equiposParticipantes)}">
+      <p>No hay equipos registrados para esta temporada.</p>
+    </div>
+
+    <!-- TABLA DE EQUIPOS -->
+    <table th:if="${!#lists.isEmpty(temporada.equiposParticipantes)}"
+           style="width: 100%; margin-top: 1rem; border-collapse: collapse;">
+      <thead>
+        <tr style="background-color: #003580; color: white;">
+		  <th style="padding: 0.5rem; border: 1px solid #ccc;">Logo</th>
+          <th style="padding: 0.5rem; border: 1px solid #ccc;">Nombre del Equipo</th>
+          <th style="padding: 0.5rem; border: 1px solid #ccc;">Ciudad</th>
+          <th style="padding: 0.5rem; border: 1px solid #ccc;">Acciones</th>
+        </tr>
+      </thead>
+	  <tbody>
+	    <tr th:each="equipo, stat : ${temporada.equiposParticipantes}" style="background-color: #f9f9f9;">
+			<!-- NUEVA COLUMNA (LOGO) -->
+			<td style="padding: 0.5rem; border: 1px solid #ccc;">
+			    <img th:src="@{'/admin/imagen-equipo/' + ${equipo.nombre}}"
+			         style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+			</td>
+	      <td th:text="${equipo.nombre}" style="padding: 0.5rem; border: 1px solid #ccc;"></td>
+	      <td th:text="${equipo.ciudad}" style="padding: 0.5rem; border: 1px solid #ccc;"></td>
+	      <td style="padding: 0.5rem; border: 1px solid #ccc;">
+	        <a th:href="@{'/admin/editar-equipo/' + ${temporada.id} + '/' + ${stat.index}}" class="btn">✏️ Editar</a>
+	        <a th:href="@{'/admin/eliminar-equipo/' + ${temporada.id} + '/' + ${stat.index}}"
+	           onclick="return confirm('¿Estás seguro de eliminar este equipo?');"
+	           class="btn" style="background: linear-gradient(45deg, #8B0000, #C8102E);">🗑️ Eliminar</a>
+	      </td>
+	    </tr>
+	  </tbody>
+    </table>
+
+    <br><hr><br>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

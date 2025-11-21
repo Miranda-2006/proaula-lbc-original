@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jugadores</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}">
+</head>
+<body>
+
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+    <div>
+      <h2>Jugadores Lanzadores y Bateadores</h2>
+    </div>
+  </header>
+
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/temporadas">Temporadas</a>
+    <a href="/temporadas-jugadores">Jugadores</a>
+    <a href="#descripcion">¿Qué es?</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Lanzadores</h2>
+      <div th:if="${lanzadores.isEmpty()}">
+        <p>No hay lanzadores registrados.</p>
+      </div>
+      <ul th:if="${!lanzadores.isEmpty()}">
+        <li th:each="lanzador : ${lanzadores}">
+          <strong th:text="${lanzador.nombre}">Nombre</strong>  
+          <span th:text="${lanzador.equipo}">Equipo</span>  
+          <span th:text="'ERA: ' + ${lanzador.era}">ERA</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Bateadores</h2>
+      <div th:if="${bateadores.isEmpty()}">
+        <p>No hay bateadores registrados.</p>
+      </div>
+      <ul th:if="${!bateadores.isEmpty()}">
+        <li th:each="bateador : ${bateadores}">
+          <strong th:text="${bateador.nombre}">Nombre</strong> – 
+          <span th:text="${bateador.equipo}">Equipo</span> – 
+          <span th:text="'AVG: ' + ${bateador.average}">AVG</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+
+</body>
+</html>

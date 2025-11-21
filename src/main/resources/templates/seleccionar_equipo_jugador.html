@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Equipo</title>
+    <link rel="stylesheet" href="/css/stylehome.css"> <!-- Ruta a tu archivo CSS -->
+</head>
+<body>
+    <!-- Header con el banner y el título -->
+    <header id="inicio">
+        <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+        <h1>Liga de Béisbol de Cartagena</h1>
+        <p>Bienvenido al sistema de gestión de la liga</p>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="/admin/jugadores">Volver</a>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main>
+            <h2>Temporada: [[${temporada.nombreTemporada}]]</h2>
+
+        <!-- Selección de equipo -->
+        <section>
+            <h2>Agregar jugador a un equipo</h2>
+            <ul>
+                <li th:each="equipo, index : ${temporada.equiposParticipantes}">
+                    <strong>[[${equipo.nombre}]]</strong><br>
+                    <a th:href="@{/admin/agregar-bateador/{id}/{i}(id=${temporada.id}, i=${index.index})}" class="btn">Agregar Bateador</a>
+                    <a th:href="@{/admin/agregar-lanzador/{id}/{i}(id=${temporada.id}, i=${index.index})}" class="btn">Agregar Lanzador</a>
+                    <a th:href="@{/admin/listar-jugadores-equipo/{id}/{i}(id=${temporada.id}, i=${index.index})}" class="btn">Ver Jugadores</a> <!-- Nuevo enlace -->
+                </li>
+            </ul>
+
+            <h2>Agregar jugador como agente libre</h2>
+            <br>
+            <a th:href="@{/admin/agregar-bateador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Bateador Libre</a>
+            <a th:href="@{/admin/agregar-lanzador-libres/{idTemporada}(idTemporada=${temporada.id})}" class="btn">Agregar Lanzador Libre</a>
+			
+			<ul>
+			    <li th:each="jugador : ${jugadores}">
+			        <span>[[${jugador.nombre}]]</span>
+			        <a th:href="@{/admin/mover-a-libres/{idJugador}(idJugador=${jugador.id})}" class="btn">Mover a Agente Libre</a>
+			    </li>
+			</ul>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+    </footer>
+</body>
+</html>

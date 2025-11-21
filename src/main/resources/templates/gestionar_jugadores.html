@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar Jugadores</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}">
+</head>
+<body>
+
+  <!-- Encabezado con banner -->
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1 th:text="'Gestionar Jugadores - ' + ${temporada.nombreTemporada}"></h1>
+  </header>
+
+  <!-- Navegación -->
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/temporadas">Temporadas</a>
+    <a href="/temporadas-jugadores">Jugadores</a>
+    <a href="#descripcion">¿Qué es?</a>
+  </nav>
+
+  <!-- Botones de acción -->
+  <section style="text-align: center; margin: 1.5rem 0;">
+    <a th:href="@{/admin/crear-jugador-agente-libre/{id}(id=${temporada.id})}" class="btn"
+       style="margin-right: 1rem;">➕ Agregar Agente Libre</a>
+    <a th:href="@{/admin/jugadores}" class="btn btn-secondary"
+       style="background: linear-gradient(45deg, #555, #888); color: white;">🔙 Volver</a>
+  </section>
+
+  <!-- Contenido principal -->
+  <main class="contenido" style="max-width: 900px; margin: auto; padding: 2rem;">
+    <h2 style="text-align: center;">Equipos en la Temporada</h2>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+      <thead>
+        <tr style="background-color: #005f73; color: white;">
+          <th style="padding: 0.75rem;">Nombre del Equipo</th>
+          <th style="padding: 0.75rem;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="equipo, iter : ${temporada.equiposParticipantes}"
+            style="background-color: #f8f9fa; border-bottom: 1px solid #ddd;">
+          <td th:text="${equipo.nombre}" style="padding: 0.75rem;"></td>
+          <td style="padding: 0.75rem;">
+            <a th:href="@{/admin/agregar-bateador/{idTemporada}/{indexEquipo}(idTemporada=${temporada.id}, indexEquipo=${iter.index})}"
+               class="btn" style="margin-right: 0.5rem;">🏏 Agregar Bateador</a>
+            <a th:href="@{/admin/agregar-lanzador/{idTemporada}/{indexEquipo}(idTemporada=${temporada.id}, indexEquipo=${iter.index})}"
+               class="btn">⚾ Agregar Lanzador</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+
+</body>
+</html>

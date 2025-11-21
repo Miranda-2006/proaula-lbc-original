@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipos - Liga de Béisbol</title>
+  <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+
+  <header>
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Listado de Equipos Registrados</p>
+  </header>
+
+  <nav>
+    <a href="/admin">Volver</a>
+  </nav>
+
+  <main>
+    <a href="/equipos/nuevo" class="btn">➕ Agregar Nuevo Equipo</a>
+    <br><br>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Ciudad</th>
+          <th>Partidos Ganados</th>
+          <th>Partidos Perdidos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="equipo : ${equipos}">
+          <td th:text="${equipo.nombre}">Nombre</td>
+          <td th:text="${equipo.ciudad}">Ciudad</td>
+          <td th:text="${equipo.partidosGanados}">Partidos Ganados</td>
+          <td th:text="${equipo.partidosPerdidos}">Partidos Perdidos</td>
+          <td>
+            <a th:href="@{'/equipos/editar/' + ${equipo.id}}" class="btn">✏️ Editar</a>
+            <a th:href="@{'/equipos/eliminar/' + ${equipo.id}}" class="btn" onclick="return confirm('¿Eliminar este equipo?')" 
+               style="background: linear-gradient(45deg, #8B0000, #C8102E);">🗑️ Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+
+</body>
+</html>

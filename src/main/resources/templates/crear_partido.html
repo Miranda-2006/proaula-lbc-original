@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crear Partido</title>
+  <link rel="stylesheet" href="/css/stylehome.css" />
+</head>
+<body>
+
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+    <div>
+      <h2>Crear Partido</h2>
+    </div>
+  </header>
+
+  <nav>
+      <a href="/admin/listar-temporadas-partidos">Volver</a>
+  </nav>
+
+  <main class="contenido" style="max-width: 700px; margin: auto; padding: 1rem;">
+	<section>
+		<h2>Temporadas Disponibles</h2>
+	</section>
+
+    <form th:action="@{'/admin/crear-partido/' + ${idTemporada}}" method="post" th:object="${partido}" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      
+      <div style="display: flex; flex-direction: column;">
+        <label for="nombreEquipoLocal">Equipo Local:</label>
+        <select id="nombreEquipoLocal" th:field="*{nombreEquipoLocal}" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+          <option value="" disabled selected>Seleccione un equipo local</option>
+          <option th:each="equipo : ${equipos}" th:value="${equipo.nombre}" th:text="${equipo.nombre}"></option>
+        </select>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="nombreEquipoVisitante">Equipo Visitante:</label>
+        <select id="nombreEquipoVisitante" th:field="*{nombreEquipoVisitante}" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+          <option value="" disabled selected>Seleccione un equipo visitante</option>
+          <option th:each="equipo : ${equipos}" th:value="${equipo.nombre}" th:text="${equipo.nombre}"></option>
+        </select>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="fecha">Fecha del Partido:</label>
+        <input type="date" id="fecha" th:field="*{fecha}" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" th:field="*{hora}" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="estadio">Estadio:</label>
+        <select id="estadio" th:field="*{estadio.nombre}" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;">
+          <option value="" disabled selected>Seleccione un estadio</option>
+          <option th:each="estadio : ${estadios}" th:value="${estadio.nombre}" th:text="${estadio.nombre}"></option>
+        </select>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="innings">Innings Totales:</label>
+        <input type="number" id="innings" th:field="*{innings}" min="1" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="inningActual">Inning Actual:</label>
+        <input type="number" id="inningActual" th:field="*{inningActual}" min="1" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="hitTotalesPartido">Hits Totales:</label>
+        <input type="number" id="hitTotalesPartido" th:field="*{hitTotalesPartido}" min="0" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <label for="erroresTotalesPartido">Errores Totales:</label>
+        <input type="number" id="erroresTotalesPartido" th:field="*{erroresTotalesPartido}" min="0" required
+          style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc;" />
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <button type="submit" class="btn" style="width: 100%;">Guardar Partido</button>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+  </footer>
+</body>
+</html>

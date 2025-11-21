@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editar Equipo</title>
+  <link rel="stylesheet" th:href="@{/css/stylehome.css}" />
+</head>
+<body>
+
+<header id="inicio">
+  <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+  <h1>Liga de Béisbol de Cartagena</h1>
+  <p>Bienvenido al sistema de gestión de la liga</p>
+  <div>
+    <h2 th:text="${temporada.nombreTemporada}">Temporada</h2>
+  </div>
+</header>
+
+<nav>
+  <a href="/admin/listar-equipos">Volver</a>
+</nav>
+
+<main class="contenido" style="max-width: 700px; margin: auto; padding: 1rem;">
+  <form th:action="@{'/admin/editar-equipo/' + ${temporada.id} + '/' + ${indice}}" method="post"
+        style="background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+
+    <input type="hidden" name="_method" value="post" />
+
+    <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nombre del Equipo:</label>
+    <input type="text" id="nombre" name="nombre" th:value="${equipo.nombre}" required
+           style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #ccc;" />
+
+    <label for="ciudad" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Ciudad:</label>
+    <input type="text" id="ciudad" name="ciudad" th:value="${equipo.ciudad}" required
+           style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid #ccc;" />
+
+    <div style="text-align: center;">
+      <button type="submit" class="btn" style="margin-right: 1rem;">💾 Guardar Cambios</button>
+	  <br>
+      <a th:href="@{/admin/listar-equipos}" class="btn btn-secondary" style="background: linear-gradient(45deg, #666, #999);">🔙 Cancelar</a>
+    </div>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Estadios - Crear y Editar Estadios</title>
+    <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+
+	
+	<header>
+	    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+	    <h1>Liga de Béisbol de Cartagena</h1>
+	    <p>Bienvenido al sistema de gestión de la liga</p>
+	    <div>
+			<h1>Gestión de Estadios</h1>
+			    <h2>Crear, Editar, Ver y Eliminar Estadios</h2>
+	    </div>
+	</header>	
+
+	<nav>
+		    <a href="/admin">Volver</a>
+		  </nav>
+	
+<main>
+    <section>
+        <h2>Temporadas Disponibles</h2>
+
+        <div th:if="${temporadas != null and !#lists.isEmpty(temporadas)}">
+            <div th:each="temporada : ${temporadas}" class="temporada-card"
+                 style="background-color: rgba(255,255,255,0.95); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+
+                <h3 th:text="${temporada.nombreTemporada + ' (' + temporada.anio + ')'}" style="margin-bottom: 1rem;">Nombre de Temporada</h3>
+
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <a th:href="@{'/admin/crear-estadio/' + ${temporada.id}}" class="btn">Crear Estadio</a>
+                </div>
+
+                <!-- Estadios -->
+                <div th:if="${temporada.estadios != null and !#lists.isEmpty(temporada.estadios)}">
+                    <div style="display: grid; gap: 1rem;">
+                        <div th:each="estadio, iterStat : ${temporada.estadios}" class="estadio-card"
+                             style="background-color: #f9f9f9; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+
+                            <h4 th:text="${estadio.nombre}" style="margin: 0; color: #2c3e50;"></h4>
+                            <p th:text="'Ubicación: ' + ${estadio.ubicacion}" style="margin: 0.5rem 0; color: #555;"></p>
+
+                            <!-- Botones -->
+                            <div style="margin-top: 0.5rem;">
+                                <a th:href="@{'/admin/editar-estadio/' + ${temporada.id} + '/' + ${iterStat.index}}"
+                                   class="btn btn-secondary" style="margin-right: 0.5rem;">Editar</a>
+                                <a th:href="@{'/admin/eliminar-estadio/' + ${temporada.id} + '/' + ${iterStat.index}}"
+                                   class="btn btn-danger"
+                                   onclick="return confirm('¿Seguro que deseas eliminar este estadio?')">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${temporadas == null or #lists.isEmpty(temporadas)}">
+            <p>No hay temporadas disponibles.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

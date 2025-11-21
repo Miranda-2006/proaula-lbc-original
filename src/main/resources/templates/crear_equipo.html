@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crear Equipo - LBC</title>
+  <link rel="stylesheet" th:href="@{/css/crear-equipo.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO PEQUEÑO -->
+<header class="hero-compact-small">
+  <div class="hero-inner-small">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo-small">
+    <h1 class="hero-title-small">Agregar Equipo a la Temporada</h1>
+  </div>
+</header>
+
+<!-- VOLVER -->
+<nav class="simple-nav">
+  <div class="nav-container">
+    <a href="/admin/listar-equipos" class="nav-link btn-back">Volver</a>
+  </div>
+</nav>
+
+<main class="form-content">
+  <div class="form-card">
+    <h2 class="form-title">Formulario de Registro de Equipo</h2>
+
+    <!-- 🟢 IMPORTANTE: enctype agregado para subir imágenes -->
+    <form th:action="@{/admin/crear-equipo/{idTemporada}(idTemporada=${idTemporada})}"
+          th:object="${equipo}" method="post" 
+          enctype="multipart/form-data" 
+          class="equipo-form">
+
+      <div class="form-group">
+        <label>Nombre del Equipo:</label>
+        <input type="text" th:field="*{nombre}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Ciudad:</label>
+        <input type="text" th:field="*{ciudad}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Partidos Ganados:</label>
+        <input type="number" th:field="*{partidosGanados}" value="0" min="0" required />
+      </div>
+
+      <div class="form-group">
+        <label>Partidos Perdidos:</label>
+        <input type="number" th:field="*{partidosPerdidos}" value="0" min="0" required />
+      </div>
+
+      <!-- 🟢 CAMPO PARA SUBIR IMAGEN -->
+      <div class="form-group">
+        <label>Logo del Equipo:</label>
+        <input type="file" name="imagen" accept="image/*" required />
+      </div>
+
+      <button type="submit" class="btn-primary">Guardar Equipo</button>
+    </form>
+  </div>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

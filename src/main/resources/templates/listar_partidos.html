@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Listar Partidos</title>
+    <link rel="stylesheet" th:href="@{/css/listar-partidos.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO -->
+<header class="hero-compact">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <div class="hero-text">
+      <h1 class="hero-title">Liga de Béisbol de Cartagena</h1>
+      <p class="hero-subtitle">Gestión de Partidos</p>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="/" class="nav-link">Inicio</a>
+    <a href="/temporadas-jugadores" class="nav-link">Jugadores</a>
+  </div>
+</nav>
+
+<!-- CONTENIDO CON ANIMACIÓN -->
+<main class="contenido fade-in">
+  <h2 class="section-title">Temporadas y Partidos</h2>
+
+  <div th:if="${temporadas != null and !#lists.isEmpty(temporadas)}">
+    <div th:each="temporada : ${temporadas}" class="temporada-card fade-in">
+      <h3 th:text="${temporada.nombreTemporada}">Temporada</h3>
+
+      <div th:if="${temporada.partidosJugados != null and !#lists.isEmpty(temporada.partidosJugados)}" class="partidos-list">
+        <div th:each="partido, iterStat : ${temporada.partidosJugados}" class="partido-card fade-in">
+          <div class="partido-header">
+            <span class="partido-numero">Partido [[${iterStat.index + 1}]]</span>
+            <span class="partido-fecha" th:text="${#temporals.format(partido.fecha, 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(partido.hora, 'hh:mm a')}"></span>
+            <span class="partido-estadio" th:text="${partido.estadio.nombre}">Estadio</span>
+          </div>
+          <div class="partido-score">
+            <span class="equipo-local" th:text="${partido.nombreEquipoLocal}">Local</span>
+            <span class="score-local" th:text="${partido.carrerasEquipoLocal}">0</span>
+            <span class="vs">VS</span>
+            <span class="score-visitante" th:text="${partido.carrerasEquipoVisitante}">0</span>
+            <span class="equipo-visitante" th:text="${partido.nombreEquipoVisitante}">Visitante</span>
+          </div>
+        </div>
+      </div>
+
+      <p th:if="${temporada.partidosJugados == null or #lists.isEmpty(temporada.partidosJugados)}" class="no-partidos fade-in">
+        No hay partidos registrados para esta temporada.
+      </p>
+    </div>
+  </div>
+
+  <p th:if="${temporadas == null or #lists.isEmpty(temporadas)}" class="no-temporadas fade-in">
+    No hay temporadas disponibles.
+  </p>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

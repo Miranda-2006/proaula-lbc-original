@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Equipo - Liga de Béisbol</title>
+  <link rel="stylesheet" href="/css/stylehome.css">
+</head>
+<body>
+
+  <!-- Encabezado con logo y nombre -->
+  <header id="inicio">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar" />
+    <h1>Liga de Béisbol de Cartagena</h1>
+    <p>Bienvenido al sistema de gestión de la liga</p>
+  </header>
+
+  <!-- Navegación -->
+  <nav>
+    <a href="/admin/listar-equipos">Volver</a>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="contenido" style="max-width: 700px; margin: auto; padding: 2rem;">
+    <h2 style="text-align: center; margin-bottom: 1rem;">Editar Equipo</h2>
+
+    <form th:action="@{'/equipos/editar/' + ${equipo.id}}" method="post"
+          style="background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+
+      <label for="nombre" style="display: block; margin-bottom: 0.5rem;">Nombre del Equipo:</label>
+      <input type="text" id="nombre" name="nombre" th:value="${equipo.nombre}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <label for="ciudad" style="display: block; margin-bottom: 0.5rem;">Ciudad:</label>
+      <input type="text" id="ciudad" name="ciudad" th:value="${equipo.ciudad}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <label for="partidosGanados" style="display: block; margin-bottom: 0.5rem;">Partidos Ganados:</label>
+      <input type="number" id="partidosGanados" name="partidosGanados" th:value="${equipo.partidosGanados}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <label for="partidosPerdidos" style="display: block; margin-bottom: 0.5rem;">Partidos Perdidos:</label>
+      <input type="number" id="partidosPerdidos" name="partidosPerdidos" th:value="${equipo.partidosPerdidos}" required
+             style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 8px;" />
+
+      <div style="text-align: center;">
+        <button type="submit" class="btn" style="margin-right: 1rem;">💾 Actualizar</button>
+        <a href="/equipos" class="btn btn-secondary" style="background: linear-gradient(45deg, #555, #888); color: white; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">🔙 Volver</a>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Liga de Béisbol de Bolívar</p>
+  </footer>
+
+</body>
+</html>

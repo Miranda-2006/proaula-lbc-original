@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" th:href="@{/css/admin-panel.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO -->
+<header class="hero-compact">
+    <div class="hero-inner">
+        <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+        <div class="hero-text">
+            <h1 class="hero-title">Panel de Administración</h1>
+            <p class="hero-subtitle">Gestión de Temporadas, Equipos y Jugadores</p>
+        </div>
+    </div>
+</header>
+
+<!-- NAV VOLVER -->
+<nav class="main-nav simple-nav">
+    <div class="nav-container">
+        <a href="/" class="nav-link">Volver al inicio</a>
+    </div>
+</nav>
+
+<main class="contenido admin-content">
+    <div class="admin-card">
+        <h2 class="admin-welcome">Bienvenido, Administrador</h2>
+        <p class="admin-desc">Accede a las herramientas para gestionar temporadas, equipos y jugadores.</p>
+
+        <div class="admin-grid">
+            <a href="/admin/listar-temporadas" class="admin-btn">Administrar Temporadas</a>
+            <a href="/admin/listar-equipos" class="admin-btn">Administrar Equipos</a>
+            <a href="/admin/jugadores" class="admin-btn">Administrar Jugadores</a>
+            <a href="/admin/listar-temporadas-partidos" class="admin-btn">Administrar Partidos</a>
+            <a href="/admin/listar-temporadas-estadios" class="admin-btn">Administrar Estadios</a>
+        </div>
+
+        <form th:action="@{/logout}" method="post" class="logout-form-center">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit" class="btn-logout">Cerrar sesión</button>
+        </form>
+    </div>
+</main>
+
+<footer class="admin-footer">
+    <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

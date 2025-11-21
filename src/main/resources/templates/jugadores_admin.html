@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Jugadores</title>
+  <link rel="stylesheet" th:href="@{/css/agregar-jugadores.css}">
+</head>
+<body>
+
+<!-- HERO COMPACTO -->
+<header class="mini-hero">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <h1 class="hero-title">Agregar Jugadores a una Temporada</h1>
+  </div>
+</header>
+
+<!-- VOLVER -->
+<nav class="simple-nav">
+  <div class="nav-container">
+    <a href="/admin" class="btn-back">Volver</a>
+  </div>
+</nav>
+
+<main class="form-content fade-in">
+  <div class="form-card">
+    <h2 class="form-title">Selecciona una Temporada</h2>
+
+    <form th:action="@{/admin/jugadores/seleccionar}" method="get">
+      <div class="form-group">
+        <label for="idTemporada">Temporada:</label>
+        <select name="idTemporada" id="idTemporada" required>
+          <option value="">-- Seleccione una temporada --</option>
+          <option th:each="t : ${temporadas}" th:value="${t.id}" th:text="${t.nombreTemporada + ' (' + t.anio + ')'}"></option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary">Continuar</button>
+    </form>
+  </div>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

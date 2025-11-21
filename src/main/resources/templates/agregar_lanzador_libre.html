@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Lanzador Libre</title>
+    <link rel="stylesheet" th:href="@{/css/agregar-lanzador.css}">
+</head>
+<body>
+
+<!-- MINI HERO -->
+<header class="mini-hero">
+  <div class="hero-inner">
+    <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="LBC" class="hero-logo">
+    <h1 class="hero-title">Agregar Lanzador Libre</h1>
+  </div>
+</header>
+
+<!-- BOTÓN VOLVER -->
+<nav class="simple-nav">
+  <div class="nav-container">
+    <a th:href="@{/admin/jugadores/seleccionar(idTemporada=${idTemporada})}" class="btn-back">Volver</a>
+  </div>
+</nav>
+
+<main class="form-content">
+  <div class="form-card">
+    <h2 class="form-title">Agregar Lanzador Libre</h2>
+
+    <form th:action="@{/admin/agregar-lanzador-libres/{idTemporada}(idTemporada=${idTemporada})}"
+          th:object="${lanzador}"
+          method="post"
+          class="lanzador-form">
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" th:field="*{edad}" placeholder="Edad" required />
+      </div>
+
+      <div class="form-group">
+        <label for="posicion">Posición</label>
+        <input type="text" id="posicion" th:field="*{posicion}" placeholder="Posición" />
+      </div>
+
+      <div class="form-group">
+        <label for="derecho_zurdo">Derecho o Zurdo</label>
+        <input type="text" id="derecho_zurdo" th:field="*{derecho_zurdo}" placeholder="Derecho o Zurdo" />
+      </div>
+
+      <hr class="divider">
+
+      <h3 class="stats-title">Estadísticas de Lanzador</h3>
+
+      <div class="stats-grid">
+        <div class="form-group">
+          <label for="numeroLanzamientos">Lanzamientos</label>
+          <input type="number" id="numeroLanzamientos" th:field="*{numeroLanzamientos}" placeholder="Lanzamientos" />
+        </div>
+
+        <div class="form-group">
+          <label for="inningsLanzados">Innings Lanzados</label>
+          <input type="number" id="inningsLanzados" th:field="*{inningsLanzados}" placeholder="Innings" />
+        </div>
+
+        <div class="form-group">
+          <label for="ponchados">Ponchados</label>
+          <input type="number" id="ponchados" th:field="*{ponchados}" placeholder="Ponchados" />
+        </div>
+
+        <div class="form-group">
+          <label for="basePorBola">Bases por Bola (BB)</label>
+          <input type="number" id="basePorBola" th:field="*{basePorBola}" placeholder="BB" />
+        </div>
+
+        <div class="form-group">
+          <label for="carrerasPermitidas">Carreras Permitidas</label>
+          <input type="number" id="carrerasPermitidas" th:field="*{carrerasPermitidas}" placeholder="Carreras" />
+        </div>
+
+        <div class="form-group">
+          <label for="hitsPermitidos">Hits Permitidos</label>
+          <input type="number" id="hitsPermitidos" th:field="*{hitsPermitidos}" placeholder="Hits" />
+        </div>
+
+        <div class="form-group">
+          <label for="aparicionesPlato">Apariciones al Plato</label>
+          <input type="number" id="aparicionesPlato" th:field="*{aparicionesPlato}" placeholder="Apariciones" />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Guardar Lanzador Libre</button>
+    </form>
+  </div>
+</main>
+
+<footer class="page-footer">
+  <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+</footer>
+
+</body>
+</html>

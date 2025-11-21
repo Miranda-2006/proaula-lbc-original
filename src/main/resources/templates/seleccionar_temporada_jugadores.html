@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Temporada</title>
+    <link rel="stylesheet" href="/css/stylehome.css"> <!-- Ruta a tu archivo CSS -->
+</head>
+<body>
+    <!-- Header con el banner y el título -->
+    <header id="inicio">
+        <img src="https://i.ibb.co/Bz7h7YK/Recurso-5-100.jpg" alt="Banner Liga de Béisbol de Bolívar">
+        <h1>Liga de Béisbol de Cartagena</h1>
+        <p>Bienvenido al sistema de gestión de la liga</p>
+        <div>
+            <h2>Temporada Actual: 2025</h2>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="/temporadas">Temporadas</a>
+        <a href="/temporadas-jugadores">Jugadores</a>
+        <a href="#descripcion">¿Qué es?</a>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main>
+        <header>
+            <a th:href="@{/admin}" class="btn">Volver</a>
+            <h1>Seleccionar Temporada</h1>
+        </header>
+
+        <!-- Tabla para mostrar las temporadas -->
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre Temporada</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="temporada : ${temporadas}">
+                        <td th:text="${temporada.nombreTemporada}"></td>
+                        <td>
+                            <a th:href="@{/admin/jugadores/temporada/{id}(id=${temporada.id})}" class="btn">Gestionar Jugadores</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Liga de Béisbol de Cartagena</p>
+    </footer>
+</body>
+</html>
